@@ -1,0 +1,178 @@
+---
+title: "DATA 605 - Week 3 Discussion"
+author: "Amber Ferger"
+date: "2/10/2020"
+output: html_document
+---
+
+# Chapter E, Section EE, Question C19 (pg.298)
+## Question 
+
+**C19: Find the eigenvalues, eigenspaces, algebraic multiplicities and geometric multiplicities for the matrix below. It is possible to do all these computations by hand, and it would be instructive to do so.**  
+
+$$C = \left[\begin{array}{cc} 
+-1 & 2\\
+-6 & 6
+\end{array}\right]$$  
+
+## Solution
+
+**Eigenvalues:**
+$$det(C-I_{n}x) = 0$$
+$$\left|\begin{array}{cc} 
+-1-x & 2\\
+-6 & 6-x
+\end{array}\right| = 0$$
+$$(-1-x)(6-x) + 12 = 0$$
+$$x^2 - 5x + 6 = 0$$
+$$(x-2)(x-3)= 0$$
+$$\lambda_{1} = 2, \lambda_{2} = 3$$
+
+**Eigenvectors:**  
+  
+$\lambda_1 = 2$
+
+$$(C-\lambda_1I_n)x = 0 $$
+
+$$(\left[\begin{array}{cc} 
+-1 & 2\\
+-6 & 6
+\end{array}\right] -
+\left[\begin{array}{cc} 
+2 & 0\\
+0 & 2
+\end{array}\right])(
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right]) = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]$$
+
+$$\left[\begin{array}{cc} 
+-3 & 2\\
+-6 & 4
+\end{array}\right]
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right] = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]
+$$
+
+$$R_2 = -2R_1+ R_2: \left[\begin{array}{cc} 
+-3 & 2 \\
+0 & 0 
+\end{array}\right]
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right] = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]
+$$ 
+
+$$-3x_1+2x_2 = 0$$
+
+ 
+$$E_C(2) = \{\left[\begin{array}{cc} 
+2/3 \\
+1
+\end{array}\right]\}$$
+
+###################################
+
+$\lambda_2 = 3$
+
+$$(C-\lambda_1I_n)x = 0 $$
+
+$$(\left[\begin{array}{cc} 
+-1 & 2\\
+-6 & 6
+\end{array}\right] -
+\left[\begin{array}{cc} 
+3 & 0\\
+0 & 3
+\end{array}\right])(
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right]) = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]$$
+
+$$\left[\begin{array}{cc} 
+-4 & 2\\
+-6 & -1/2
+\end{array}\right]
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right] = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]
+$$
+
+$$R_2 = -1/6R_2: \left[\begin{array}{cc} 
+-4 & 2 \\
+1 & -1/2
+\end{array}\right]
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right] = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]
+$$ 
+
+$$R_1 = R_1 +4R_2: \left[\begin{array}{cc} 
+0 & 0 \\
+1 & -1/2
+\end{array}\right]
+\left[\begin{array}{cc} 
+x_1 \\
+x_2 
+\end{array}\right] = 
+\left[\begin{array}{cc} 
+0 \\
+0 
+\end{array}\right]
+$$ 
+
+
+$$x_1 - 1/2x_2 = 0$$
+
+ 
+$$E_C(3) = \{\left[\begin{array}{cc} 
+1/2 \\
+1
+\end{array}\right]\}$$  
+
+
+**Algebraic Multiplicities: **  
+By definition, the **algebraic multiplicity**, $\alpha_C$, of $\lambda$ is the highest power (x - $\lambda$) that divides the characteristic polynomial, $p_C(x)$. Therefore,   
+$p_C(x) = (x−2)(x−3)=0$  
+$\alpha_C(\lambda_1) = 1$  
+$\alpha_C(\lambda_2) = 1$
+  
+
+**Geometric Multiplicities:**  
+By definition, the **geometric multiplicity**, $\gamma_{C}$, of $\lambda$ is the dimension of the eigenspace $E_C(\lambda)$. Therefore:  
+$\gamma_{C}(\lambda_1) = 1$    
+$\gamma_{C}(\lambda_2) = 1$  
+  
+
+
