@@ -1,0 +1,39 @@
+---
+title: "DATA 605 - Week 1 Discussion"
+author: "Amber Ferger"
+date: "1/29/2020"
+output: html_document
+---
+
+# Chapter SLE, Section SSLE - Question C30 (pg.14)
+**C30† Find all solutions to the linear system:**
+
+x + y = 5  
+2x − y = 3  
+
+**To solve this system of equations, we will first multiply equation 1 by -2 and add to equation 2: **
+
+x +  y = 5  
+  - 3y = -7
+
+**Now we can divide equation 2 by -3 to solve for y:**
+
+x + y = 5
+    y = 7/3
+    
+**Lastly, we will plug our value for y into equation 1 to solve for x: **
+
+x + (7/3) = 15/3
+x = 8/3
+
+**Our final solution is:**
+x = 8/3, y = 7/3
+
+
+
+``` {r}
+
+
+
+```
+
