@@ -1,0 +1,195 @@
+---
+title: "DATA 605 - Week 4 Discussion"
+author: "Amber Ferger"
+date: "2/17/2020"
+output: html_document
+---
+
+
+# Chapter LT, Section LT, Question C31 (pg.340)
+## Question 
+
+**For the linear transformation *S* compute the preimages.**  
+$$S: C^3 \rightarrow C^3, \; \; \; \; S\left(\Biggl[\begin{array}{cc} 
+a \\
+b \\
+c
+\end{array}\Biggr]\right) = \left[\begin{array}{cc} 
+a-2b-c \\
+3a-b+2c \\
+a+b+2c
+\end{array}\right]$$  
+
+$$S^{-1}\left(\Biggl[\begin{array}{cc} 
+-2 \\
+5 \\
+3
+\end{array}\Biggr]\right)\; \; \; \;
+S^{-1}\left(\Biggl[\begin{array}{cc} 
+-5 \\
+5 \\
+7
+\end{array}\Biggr]\right)$$
+
+
+
+
+## Solution  
+
+$S^{-1}\left(\Biggl[\begin{array}{cc} 
+-2 \\
+5 \\
+3
+\end{array}\Biggr]\right) = \left[\begin{array}{cc} 
+1 & -2 & -1 & -2\\
+3 & -1 & 2 & 5 \\
+1 & 1 & 2 & 3
+\end{array}\right]$   
+
+$$R_3 = R_3 - R_1: \left[\begin{array}{cc} 
+1 & -2 & -1 & -2\\
+3 & -1 & 2 & 5 \\
+0 & 3 & 3 & 5
+\end{array}\right]$$  
+
+$$R_2 = R_2 - 3R_1: \left[\begin{array}{cc} 
+1 & -2 & -1 & -2\\
+0 & 5 & 5 & 11 \\
+0 & 3 & 3 & 5
+\end{array}\right]$$ 
+
+$$R_2 = \frac{1}{5}R_2: \left[\begin{array}{cc} 
+1 & -2 & -1 & -2\\
+0 & 1 & 1 & \frac{11}{5} \\
+0 & 3 & 3 & 5
+\end{array}\right]$$ 
+
+$$R_3 = R_3 - 3R_2: \left[\begin{array}{cc} 
+1 & -2 & -1 & -2\\
+0 & 1 & 1 & \frac{11}{5} \\
+0 & 0 & 0 & -\frac{8}{5}
+\end{array}\right]$$  
+
+$$R_1 = R_1 + 2R_2: \left[\begin{array}{cc} 
+1 & 0 & 1 & \frac{12}{5}\\
+0 & 1 & 1 & \frac{11}{5} \\
+0 & 0 & 0 & -\frac{8}{5}
+\end{array}\right]$$ 
+
+$$T^{-1}(v) = \{u \: \epsilon \: C^3 \: | \:  T(u) = v\}$$
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+u_1 \\
+u_2 \\
+u_3
+\end{array}\Biggr] \: \Biggl | \: u_1 = \frac{12}{5}-u_3, \: u_2 = \frac{11}{5} - u_3 \right\} $$  
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+\frac{12}{5}-u_3 \\
+\frac{11}{5}-u_3 \\
+u_3
+\end{array}\Biggr] \: \Biggl | \: u_3 \: \epsilon \: C \right\} $$
+
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+\frac{12}{5} \\
+\frac{11}{5} \\
+0
+\end{array}\Biggr] + u_3 \Biggl[\begin{array}{cc} 
+-1 \\
+-1 \\
+1
+\end{array}\Biggr]\: , \: u_3 \: \epsilon \: C \right\} $$  
+
+
+$$ = \Biggl[\begin{array}{cc} 
+\frac{12}{5} \\
+\frac{11}{5} \\
+0
+\end{array}\Biggr] + \Biggl< \Biggl[\begin{array}{cc} 
+-1 \\
+-1 \\
+1
+\end{array}\Biggr] \Biggr> $$
+
+
+
+
+
+##########################################
+
+$S^{-1}\left(\Biggl[\begin{array}{cc} 
+-5 \\
+5 \\
+7
+\end{array}\Biggr]\right) = \left[\begin{array}{cc} 
+1 & -2 & -1 & -5\\
+3 & -1 & 2 & 5 \\
+1 & 1 & 2 & 7
+\end{array}\right]$   
+
+$$R_3 = R_3 - R_1: \left[\begin{array}{cc} 
+1 & -2 & -1 & -5\\
+3 & -1 & 2 & 5 \\
+0 & 3 & 3 & 12
+\end{array}\right]$$  
+
+$$R_2 = R_2 - 3R_1: \left[\begin{array}{cc} 
+1 & -2 & -1 & -5\\
+0 & 5 & 5 & 20 \\
+0 & 3 & 3 & 12
+\end{array}\right]$$  
+
+$$R_3 = \frac{1}{3}R_3: \left[\begin{array}{cc} 
+1 & -2 & -1 & -5\\
+0 & 5 & 5 & 20 \\
+0 & 1 & 1 & 4
+\end{array}\right]$$  
+
+$$R_2 = R_2 - 5R_3: \left[\begin{array}{cc} 
+1 & -2 & -1 & -5\\
+0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 4
+\end{array}\right]$$  
+
+$$R_1 = R_1 + 2R_3: \left[\begin{array}{cc} 
+1 & 0 & 1 & 3\\
+0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 4
+\end{array}\right]$$  
+
+$$T^{-1}(v) = \{u \: \epsilon \: C^3 \: | \:  T(u) = v\}$$
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+u_1 \\
+u_2 \\
+u_3
+\end{array}\Biggr] \: \Biggl | \: u_1 = 3-u_3, \: u_2 = 4 - u_3 \right\} $$  
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+3-u_3 \\
+4-u_3 \\
+u_3
+\end{array}\Biggr] \: \Biggl | \: u_3 \: \epsilon \: C \right\} $$
+
+
+$$ = \left\{\Biggl[\begin{array}{cc} 
+3 \\
+4 \\
+0
+\end{array}\Biggr] + u_3 \Biggl[\begin{array}{cc} 
+-1 \\
+-1 \\
+1
+\end{array}\Biggr]\: , \: u_3 \: \epsilon \: C \right\} $$  
+
+
+$$ = \Biggl[\begin{array}{cc} 
+3 \\
+4 \\
+0
+\end{array}\Biggr] + \Biggl< \Biggl[\begin{array}{cc} 
+-1 \\
+-1 \\
+1
+\end{array}\Biggr] \Biggr> $$
