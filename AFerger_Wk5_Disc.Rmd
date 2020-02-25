@@ -1,0 +1,66 @@
+---
+title: "DATA 605 - Week 5 Discussion"
+author: "Amber Ferger"
+date: "2/25/2020"
+output: html_document
+---
+  
+# Chapter 1: Discrete Probability Distributions, Question 6 (pg.13) 
+
+## Question
+**In Las Vegas, a roulette wheel has 38 slots numbered 0,00,1,2,...36. The 0 and 00 slots are green and half of the remaining 36 slots are red and half are black. A croupier spins the wheel and throws in an ivory ball. If you bet $1 on red, you win $1 if the ball stops in a red slot and otherwise you lose $1. Write a program to find the total winnings for a player who makes 1,000 bets on red.**  
+
+## Solution  
+
+First, let's define the probability of landing on each color slot: 
+```{r}
+
+numG <- 2
+total <- 38
+numB <- (total-numG)/2
+numR <- (total-numG)/2
+
+probG <- numG/total
+probB <- numB/total
+probR <- numR/total
+
+```
+
+Next, we will define our sample space, probabilities, and initialize the number of bets: 
+```{r}
+colors <- c('G','B','R')
+probs <- c(probG, probB, probR)
+numBets <- 1000
+
+```
+
+Now we will use the sample function to sample from our colors list: 
+```{r}
+slots <- sample(colors,
+                size = numBets,
+                replace = TRUE,
+                prob = probs)
+```
+
+Finally, we will compute the total winnings for a player that makes 1,000 bets on red:
+```{r}
+
+# we will initialize our finalWinnings variable at $1, as this is the amount the player initially bets
+finalWinnings <- 1
+
+for (i in 1:numBets){
+  if(slots[i]=='R'){
+    finalWinnings <- finalWinnings+1
+  } else {
+    finalWinnings <- finalWinnings-1
+  }
+}
+
+```
+
+The player's final winnings are:
+```{r}
+
+finalWinnings
+
+```
