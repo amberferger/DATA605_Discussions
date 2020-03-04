@@ -1,0 +1,44 @@
+---
+title: "DATA 605 - Week 6 Discussion"
+author: "Amber Ferger"
+date: "3/03/2020"
+output: html_document
+---
+  
+# Chapter 3: Combinatorics, Question 9 (pg.89) 
+
+## Question
+**A more refined inequality for approximating $n!$ is given by **   
+
+$$\sqrt{2\pi n}(\frac{n}{e})^ne^{\frac{1}{12n+1}}<n!< \sqrt{2\pi n}(\frac{n}{e})^ne^{\frac{1}{12n}}$$
+
+**Write a computer program to illustrate this inequality for $n$ = 1 to 9.**
+
+## Solution  
+
+First we will define our function using the above principle: 
+```{r}
+
+approxFactorial <- function(n){
+  
+  for(i in 1:n){
+  lowerBound = sqrt(2*pi*i)* ((i/exp(1))^i)* exp(1)^(1/((12*i) + 1))
+  upperBound = sqrt(2*pi*i)* ((i/exp(1))^i)* exp(1)^(1/(12*i))
+  
+  print(paste0('n = ',i))
+  print(paste0('The approximation of n! is between: ',lowerBound,' and ',upperBound))
+  print(paste0('The true value of n! is:',factorial(i)))
+  print(paste0('n! is between the lower and upper bounds of the approximation: ',lowerBound < factorial(i) & factorial(i) < upperBound))
+  print('---------------------')
+  }
+  
+}
+
+```
+
+Now we will test for $n$ = 1 to 9.
+```{r}
+
+approxFactorial(9)
+
+```
