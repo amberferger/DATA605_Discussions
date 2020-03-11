@@ -1,0 +1,83 @@
+---
+title: "DATA 605 - Week 7 Discussion"
+author: "Amber Ferger"
+date: "3/11/2020"
+output: html_document
+---
+
+# Chapter 5: Distributions and Densities, Section 1- Important Distributions, Question 18 (pg.199)
+## Question  
+**A baker blends 600 raisins and 400 chocolate chips into a dough mix and, from this, makes 500 cookies.**  
+
+**a. Find the probability that a randomly picked cookie will have *no* raisins.**  
+**b. Find the probability that a randomly picked cookie will have *exactly two* chocolate chips.**  
+**c. Find the probability that a randomly chosen cookie will have *at least two bits* (raisins or chips) in it.**  
+
+## Solution  
+Let's first create variables for our raisins, chips, and cookies:
+```{r}
+numR <- 600
+numCC <- 400
+numC <- 500
+
+avgRperC <- numR / numC
+avgCCperC <- numCC / numC
+avgBitsperC <- (numR + numCC) / numC
+
+```
+
+### a. Find the probability that a randomly picked cookie will have no raisins.   
+
+We know that the average number of raisins per cookie is: 
+```{r}
+avgRperC
+```
+
+As a gut check, we would expect the probability of no raisins per cookie to be low. We will model this using a Poission Distribution: 
+$$P(X=x)=\frac{e^{-\lambda}\lambda^{x}}{x!}$$  
+
+where $\lambda$ is the average number of raisins per cookie, and $x$ is 0 raisins. 
+```{r}
+x <- 0
+noRaisins <- (exp(-avgRperC)* avgRperC^x)/factorial(x)
+noRaisins
+
+```
+
+
+### b. Find the probability that a randomly picked cookie will have exactly two chocolate chips.    
+We know that the average number of chocolate chips per cookie is: 
+```{r}
+avgCCperC
+```
+
+As a gut check, we know that the probability of exactly 2 chocolate chips should be low. Once again, we will model this using a poisson distribution, this time with $\lambda$ as the average number of chocolate chips per cookie, and $x$ as 2 chips.
+```{r}
+
+x2 <- 2
+twoChips <- (exp(-avgCCperC)* avgCCperC^x2)/factorial(x2)
+twoChips
+
+```
+
+### c. Find the probability that a randomly chosen cookie will have at least two bits (raisins or chips) in it.  
+
+We know that the average number of bits per cookie is: 
+```{r}
+avgBitsperC
+```
+
+We will model this by calculating the complement of the probability of there being 0 or 1 bits in the cookie:  
+$$P(X>2)=1-[P(X=0)+P(X=1)]$$
+```{r}
+
+x3 <- 0
+x4 <- 1
+prob0 <- (exp(-avgBitsperC)* avgBitsperC^x3)/factorial(x3)
+prob1 <- (exp(-avgBitsperC)* avgBitsperC^x4)/factorial(x4)
+
+prob2orMore <- 1 - (prob0+prob1)
+
+prob2orMore
+
+```
