@@ -1,0 +1,136 @@
+---
+title: "DATA 605 - Week 8 Discussion"
+author: "Amber Ferger"
+date: "3/17/2020"
+output: html_document
+---
+
+# Chapter 7: Sums of Random Variables, Question 11 (pg.291) 
+
+## Question 
+**Assume that you are playing craps with dice that are loaded in the following way: faces two, three, four, and five all come up with the same probability $\frac{1}{6} + r$. Faces one and six come up with probability $\frac{1}{6} − 2r$, with $0 < r < .02$. Write a computer program to find the probability of winning at craps with these dice, and using your program find which values of $r$ make craps a favorable game for the player with these dice.**  
+
+## Solution  
+### How to Play Craps
+
+1. Players start by placing a bet. 
+2. The sequence starts by the shooter rolling the dice. 
+3. Bettors win if the roll is a 7 or 11 and lose if it is a 2, 3, or 12. Any other number becomes the point. 
+4. If a point number is rolled, the shooter keeps rolling until either (1) the same number is rolled again (the player wins) or (2) a 7 is rolled (the player loses).
+
+This is what we will use to construct our computer program. 
+
+
+### Probabilities
+
+
+```{r, warning=FALSE, echo=FALSE, message=FALSE, results ='hide'}
+library(tidyverse)
+
+```
+
+We'll first define the values of $r$ to loop over. We'll also define a list that will hold the probabilities of winning for each value of $r$. 
+``` {r}
+
+rStart <- 0
+rStop <- 0.02
+rBy <- 0.0001
+finalProbs <- c()
+
+```
+
+
+Next, we will define the probability of rolling each sum. We'll also define the probability of winning as the probability of getting a 7 or an 11 on the first roll plus the probability of winning from a point game. 
+
+``` {r}
+
+for (r in seq(rStart, rStop, by=rBy)){
+
+  initialBet <- 2
+
+  # define probabilities for each die roll
+  p2 <- (1/6) + r
+  p3 <- (1/6) + r
+  p4 <- (1/6) + r
+  p5 <- (1/6) + r
+  
+  p1 <- (1/6) - (2*r)
+  p6 <- (1/6) - (2*r)
+  
+  # define probabilities for the sums of the die
+  # probabilities for losing
+  pRoll2 <- p1*p1
+  pRoll3 <- p1*p2 + (p2*p1)
+  pRoll12 <- p6*p6
+  
+  # probabilities for winning
+  pRoll7 <- (p1*p6) + (p2*p5) + (p3*p4) + (p5*p2) + (p4*p3) + (p6*p1)
+  pRoll11 <- (p5*p6) + (p6*p5)
+
+  # point probabilities
+  pRoll4 <- (p1*p3) + (p2*p2) + (p3*p1)
+  pRoll5 <- (p1*p4) + (p2*p3) + (p3*p2) + (p4*p1)
+  pRoll6 <- (p1*p5) + (p2*p4) + (p3*p3) + (p4*p2) + (p5*p1)
+  pRoll8 <- (p2*p6) + (p3*p5) + (p4*p4) + (p5*p3) + (p6*p2)
+  pRoll9 <- (p3*p6) + (p4*p5) + (p5*p4) + (p6*p3)
+  pRoll10 <- (p4*p6) + (p5*p5) + (p6*p4)
+  
+  # define the probabilities of winning or losing on the first round
+  pLoss <- pRoll2 + pRoll3 + pRoll12
+  pWin <- pRoll7 + pRoll11
+  
+  # define the probabilities of winning after rolling a point number
+  pWin4 <- pRoll4 * (pRoll4 / (pRoll4+pRoll7))
+  pWin5 <- pRoll5 * (pRoll5 / (pRoll5+pRoll7))
+  pWin6 <- pRoll6 * (pRoll6 / (pRoll6+pRoll7))
+  pWin8 <- pRoll8 * (pRoll8 / (pRoll8+pRoll7))
+  pWin9 <- pRoll9 * (pRoll9 / (pRoll9+pRoll7))
+  pWin10 <- pRoll10 * (pRoll10 / (pRoll10+pRoll7))
+  
+  # define the final probability of winning
+  pWinFinal <- pWin + pWin4 + pWin5 + pWin6 + pWin8 + pWin9 + pWin10
+  expecVal <- pWin*(initialBet*2) + pLoss*(-1*initialBet) 
+  
+  finalProbs <- c(finalProbs,c(r,pWinFinal))
+  
+}
+
+```
+
+
+Now that our data has been collected, we will restructure our list so that the value of $r$ is in one column and the probability of winning is in the other. 
+
+``` {r}
+# every other element
+rVals <- seq(1,length(finalProbs),2)
+R <- finalProbs[rVals]
+WIN <- finalProbs[-rVals]
+
+
+outcome <- do.call(rbind, Map(data.frame, R=R, WIN=WIN))
+
+```
+
+We can visualize the probability of winning as $r$ increases: 
+```{r}
+plot(outcome$R,outcome$WIN)
+```
+
+From this, we can see that the higher the value of $r$, the more likely we are to win. To calculate the winnings, let's look at what would happen if we bet \$5 that we will win the game. 
+```{r}
+
+outcome$EXPEC_VAL <- (outcome$WIN * 5) - ((1-outcome$WIN)*5)
+plot(outcome$R, outcome$EXPEC_VAL)
+
+```
+
+It becomes profitable to bet on winning once the value of $r$ is greater than: 
+
+``` {r}
+
+outcome %>%
+  filter(EXPEC_VAL > 0) %>%
+  select(R) %>%
+  summarise(min(R))
+
+```
