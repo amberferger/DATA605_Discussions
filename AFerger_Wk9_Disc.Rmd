@@ -1,0 +1,35 @@
+---
+title: "DATA 605 - Week 9 Discussion"
+author: "Amber Ferger"
+date: "3/25/2020"
+output: html_document
+---
+
+# Chapter 9: Central Limit Theorem, Question 12 (pg.339) 
+
+## Question
+**A balanced coin is flipped 400 times. Determine the number x such that the probability that the number of heads is between $200 − x$ and $200 + x$ is approximately .80.**
+
+## Solution
+Let's first define $n=400$ as the number of trials, $p=0.5$ as the probability of getting a head, and $q=1-p=0.5$ as the probability of getting a tail.  
+
+We know that an approximation of the binomial probability is:  
+$$P(i \leq S_n \leq j) \approx NA  \bigg(\frac{i- \frac{1}{2} - np}{\sqrt{npq}}, \frac{j + \frac{1}{2} - np}{\sqrt{npq}} \bigg)$$
+
+We will use this to solve for $x$ by substituting the lower and upper bounds in for $i$ and $j$ in our equation:  
+$$P(200-x \leq S_n \leq 200+x) \approx NA  \bigg(\frac{ (200-x) - \frac{1}{2} - np}{\sqrt{npq}}, \frac{ (200+x) + \frac{1}{2} - np}{\sqrt{npq}} \bigg)$$
+
+$$0.8\approx NA  \bigg(\frac{ (200-x) - \frac{1}{2} - (400 \cdot 0.5)}{\sqrt{(400 \cdot 0.5 \cdot 0.5)}}, \frac{ (200+x) + \frac{1}{2} - (400 \cdot 0.5)}{\sqrt{(400 \cdot 0.5 \cdot 0.5)}} \bigg)$$
+
+$$0.8 \approx NA  \bigg(\frac{ 200-x - \frac{1}{2} - 200}{\sqrt{100}}, \frac{ 200+x + \frac{1}{2} - 200}{\sqrt{100}} \bigg)$$
+
+$$0.8 \approx NA  \bigg(\frac{ -x - \frac{1}{2}}{10}, \frac{ x + \frac{1}{2}}{10} \bigg)$$
+
+$$0.8 \approx 2NA  \bigg(\frac{ x + \frac{1}{2}}{10} \bigg) $$ 
+
+$$0.4 \approx NA  \bigg(\frac{ x + \frac{1}{2}}{10} \bigg) $$
+
+We can look this value up in the table of values of $NA(0, z)$, the normal area from $0$ to $z$ and solve:  
+$$1.3 = \frac{ x + \frac{1}{2}}{10}$$
+
+$$12.5 = x $$
