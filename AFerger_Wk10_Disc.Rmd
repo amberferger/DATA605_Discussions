@@ -1,0 +1,75 @@
+---
+title: "DATA 605 - Week 10 Discussion"
+author: "Amber Ferger"
+date: "4/1/2020"
+output: html_document
+---
+
+# Chapter 11: Markov Chains, Question 11 (pg.414) 
+
+## Question
+**Assume that a man’s profession can be classified as professional, skilled laborer, or unskilled laborer. Assume that, of the sons of professional men, 80 percent are professional, 10 percent are skilled laborers, and 10 percent are unskilled laborers. In the case of sons of skilled laborers, 60 percent are skilled laborers, 20 percent are professional, and 20 percent are unskilled. Finally, in the case of unskilled laborers, 50 percent of the sons are unskilled laborers, and 25 percent each are in the other two categories. Assume that every man has at least one son, and form a Markov chain by following the profession of a randomly chosen son of a given family through several generations. Set up the matrix of transition probabilities. Find the probability that a randomly chosen grandson of an unskilled laborer is a professional man.**  
+
+
+## Solution  
+We will set up the *transition matrix* at stage 1 as: 
+$$P^1 = $$
+
+We know that each element in the transition matrix can be calculated using the following formula: 
+$$p_{ij}^n = \sum_{k=1}^r p_{ik}p_{kj}$$
+where $r$ is the number of states in the system. We are given the probabilities for the transition matrix at stage 1 $(s_1)$, and we will use this to calculate the transition matrices for the next $n$ stages.  
+  
+We will first define $r=3$ and our initial transition matrix, $P^1$:
+
+```{r}
+
+r <- 3
+# transition matrix for stage 1
+p1 <- matrix(c(0.8, 0.2, 0.25, 0.1, 0.6, 0.25, 0.1, 0.2, 0.5), 
+             nrow=3, 
+             ncol=3,
+             dimnames = list(c('P', 'S', 'U'), c('P', 'S', 'U')))
+
+p1
+
+```
+
+  
+Now we will define $n=10$ as the total number of stages to calculate, a sequence from $1:r$ that will be used to calculate the transition matrix, and a variable called $prevMatrix$ that will store the transition matrix at the previous stage. 
+
+```{r}
+
+numStages <- 10
+sumOver <- seq(r)
+prevMatrix <- p1
+
+```
+
+
+Next, we will loop through each stage and print out the transition matrix. We will define a variable, $tempMatrix$ to store the current results and overwrite the $prevMatrix$ variable with the current transition matrix at the end of our calculation. 
+```{r}
+
+for (stage in seq(from=2,to=numStages)) {
+  
+  # define temp matrix for current stage results 
+  tempMatrix <- matrix(c(0, 0, 0, 0, 0, 0, 0, 0, 0), 
+               nrow=3, 
+               ncol=3,
+               dimnames = list(c('P', 'S', 'U'), c('P', 'S', 'U')))
+  
+  # calculate each element in the transition matrix at stage n
+  for(i in seq(nrow(p1))){
+    for(j in seq(ncol(p1))){
+      tempMatrix[i,j] <- sum(prevMatrix[i,sumOver]*prevMatrix[sumOver,j])
+    }
+  }
+  
+  prevMatrix <- tempMatrix
+  
+  print(paste0('Tx matrix at stage ', stage ,': '))
+  print(prevMatrix)
+}
+
+```
+
+We can see from the results, that our probabilities start to level out at stage 6. We can identify the probability that a randomly chosen grandson of an unskilled laborer is a professional man by looking at the transition matrix in row 1, column 1 $p_{11}=0.5263158$.
