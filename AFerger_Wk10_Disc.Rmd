@@ -12,9 +12,6 @@ output: html_document
 
 
 ## Solution  
-We will set up the *transition matrix* at stage 1 as: 
-$$P^1 = $$
-
 We know that each element in the transition matrix can be calculated using the following formula: 
 $$p_{ij}^n = \sum_{k=1}^r p_{ik}p_{kj}$$
 where $r$ is the number of states in the system. We are given the probabilities for the transition matrix at stage 1 $(s_1)$, and we will use this to calculate the transition matrices for the next $n$ stages.  
