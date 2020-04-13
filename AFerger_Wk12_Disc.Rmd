@@ -1,0 +1,105 @@
+---
+title: "DATA 605 - Week 12 Discussion"
+author: "Amber Ferger"
+date: "4/13/2020"
+output: html_document
+---
+
+# Chapters 1 - 3: Linear Regression Using R
+
+## Question
+**Using R, build a  regression model for data that interests you. Conduct residual analysis.  Was the linear model appropriate? Why or why not?**
+
+## Solution
+
+I work in health insurance, so I thought it would be interesting to take a look at healthcare costs.  
+
+### Data Specs
+
+* The data is publicly available on kaggle at https://www.kaggle.com/mirichoi0218/insurance#insurance.csv. 
+* It contains 1,338 rows and 7 columns.
+* There are 6 explanatory variables (**age**, **sex**, **bmi**, **children**, **smoker**, and **region**) and 1 response variable (**charges**) in the data set. 
+* For this discussion, I will look at the relationship between **age** and **charges**. **Age** will be the explanatory variable (*x*) and **charges** will be the response varibale (*y*).
+
+
+### Load the Data
+```{r, message =FALSE}
+library(readr)
+
+insuranceData <- read_csv('https://raw.githubusercontent.com/amberferger/DATA605_Discussions/master/AFerger_Wk12_Disc_data.csv')
+
+```
+
+### Visualize the Data
+
+We can see from the following plot that as the age increases, so do the charges. Intuitively this makes sense -- as individuals age, they are more likely to have health-related issues and therefore, more cost is incurred. 
+```{r}
+plot(insuranceData$age,insuranceData$charges, main="Age vs Charges", xlab="Age", ylab="Charges")
+
+```
+
+### Linear Model
+We will now fit a linear model to the data.
+```{r}
+
+ageChgLM <- lm(insuranceData$charges ~ insuranceData$age)
+ageChgLM
+```
+
+Next, we'll plot the original data with the best fit line: 
+```{r}
+
+plot(insuranceData$age,insuranceData$charges, main="Age vs Charges", xlab="Age", ylab="Charges")
+abline(ageChgLM)
+
+```
+
+Just from looking at the plot, it appears that the model follows the general trend of the data, but doesn't predict actual values very well. (Only a few actual observations fall on the best fit line.) 
+
+
+### Evaluating the Model
+Let's take a look at the summary information of our model: 
+```{r}
+
+summary(ageChgLM)
+
+```
+
+**RESIDUALS:** The residuals should be balanced and close to the mean of zero. The median should have value near 0,  min/max values should be about the same magnitude, and the first and third quartile should have values of about the same magnitude. Ultimately, this would mean that the actual observations aren't too far from the predicted values and there isn't much variance in the predictive error.  
+
+Considering the scale of the data, our median of -5939 isn't too horrible. The quartiles have about the same magnitude. Our min and max values are drastically different in magnitude and this is because most of the positive residuals are a lot higher from the best fit line than the negative residuals.  
+
+**RESIDUAL STANDARD ERROR:** At the bottom of the summary, we can see the Residual Standard Error. This measures the variation in the residuals. As a general rule, this value should be 1.5 times the quantile values. For the first quantile: $6671 * 1.5 = 10006.5$ and for the third quantile: $5440 *1.5 = 8160$. 
+
+**ERROR:** As a general rule, a good model has standard errors that are at least five to ten times smaller than the corresponding coefficient. In this case, the standard error for the intercept is 3.378 times smaller than the coefficient and the standard error for the age variable is 11.453 times smaller. What this means is that there is significant variability in the intercept varies but little variability in the age slope. 
+
+**SIGNIFICANCE:** The last thing we will look at is the p-value for the age factor. This measures the probability that the factor is *not* important in the model. The smaller the value, the more significant the factor is. In this case, we have a p-value of 0, which means that we can reject the null hypothesis (the factor is not important), and accept the alternative (that it is important.)
+
+**MULTIPLE R-SQUARED:** This measures how well our model describes the data. Our R-squared value of 0.08941 means that the model explains 8.9% of the data's variation. 
+
+### Plotting the residuals
+To dig a bit deeper, we can examine the residuals.
+
+```{r}
+
+plot(fitted(ageChgLM),resid(ageChgLM))
+
+```
+
+Although there doesn't appear to be a pattern in the residuals as we move in either direction on the chart, we can see that they are not evenly distributed around 0. Our min value is around -10,000 whereas our max value is around 50,000. Overall, this tells us that we either need to add in other predictors or create a different model using just this factor.  
+
+In a good model we expect the residuals to be normally distributed. By graphing the data in a Q-Q plot, we can see how well the observations follow the line. If they fit the line well, we know that the data is normally distributed.  
+
+```{r}
+
+qqnorm(resid(ageChgLM))
+qqline(resid(ageChgLM))
+
+```
+
+### Conclusions
+From this analysis, we can see that modeling the healthcare costs using one-factor linear regression with age as the explanatory variable does not produce a very good output for a few reasons: 
+
+* There is a lot of variance in the residuals. In a plot of the residuals, we see that the magnitudes of the negative errors are a lot smaller than the magnitudes of the positive errors. 
+* The residuals are not normally distributed. We can see from the Q-Q plot that the data doesn't follow the line, meaning the residuals do not follow a normal distribution. 
+* The model only accounts for 8.9% of the variation in the data.
