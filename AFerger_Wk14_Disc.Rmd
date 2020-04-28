@@ -1,0 +1,43 @@
+---
+title: "DATA 605 - Week 14 Discussion"
+author: "Amber Ferger"
+date: "4/28/2020"
+output: html_document
+---
+
+## Exercise 4.3, Problem 17 (pg. 187)
+**What are the dimensions of the rectangle with the largest area that can be drawn inside the unit circle?**
+
+## Solution
+We know that the unit circle has a radius of 1 and a diameter of 2. We will use this fact to draw out our problem.
+
+![](Disc14.png)
+
+We are trying to maximize the dimensions of the rectangle, so we will take the derivative of the rectangle's area $(A=xy)$ and set equal to $0$ to do so. In order to write $y$ in terms of $x$, we can use the fact that the sides of our rectangle and the radius form a right triangle and rearrange this formula. In other words:
+$$2^2 = x^2 + y^2$$
+$$ y^2 = 4 - x^2$$
+$$ y = \sqrt{4 - x^2}$$  
+  
+Let's substitute this into our area formula:
+$$A = xy$$
+$$A(x) = x(\sqrt{4 - x^2})$$
+  
+We will now take the derivative of the area using the product rule:
+$$A'(x) = (\sqrt{4 - x^2}) + \frac{x * -2x}{2\sqrt{4-x^2}}$$
+$$A'(x) = (\sqrt{4 - x^2}) - \frac{x^2}{\sqrt{4-x^2}}$$
+  
+To maximize, we will set this derivative to $0$ and solve:
+$$0 = (\sqrt{4 - x^2}) - \frac{x^2}{\sqrt{4-x^2}}$$
+$$\frac{x^2}{\sqrt{4-x^2}} = (\sqrt{4 - x^2})$$
+$$x^2 = 4 - x^2$$
+$$2x^2 = 4$$
+$$x^2 = 2$$
+$$x = \sqrt{2}$$
+  
+We can now solve for $y$:
+$$ y = \sqrt{4 - x^2}$$  
+$$ y = \sqrt{4 - \sqrt{2}^2}$$ 
+$$ y = \sqrt{4 - 2}$$ 
+$$ y = \sqrt{2}$$ 
+  
+We can see from this that $x=y$, which means the largest rectangle is actually a square!
