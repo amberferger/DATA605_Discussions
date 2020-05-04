@@ -1,0 +1,22 @@
+---
+title: "DATA 605 - Week 15 Discussion"
+author: "Amber Ferger"
+date: "5/4/2020"
+output: html_document
+---
+
+## Exercises 8.8, Problem 21 (pg. 496)
+**Write out the first 5 terms of the Binomial series with the given $k-value$: $k = \frac{1}{2}$**
+
+## Solution
+We know that the Binomial Series can be written as: 
+$$(1+x)^k = \sum_{n=0}^{\infty} \binom{k}{n} x^n = 1 + kx + \frac{k(k-1)}{2!}x^2 + \frac{k(k-1)(k-2)}{3!}x^3 + \frac{k(k-1)(k-2)(k-3)}{4!}x^3 + ...$$
+
+When $k=\frac{1}{2}$, the first 5 terms can be written as:
+$$(1+x)^{\frac{1}{2}} = \sum_{n=0}^{5} \binom{\frac{1}{2}}{n} x^n = 1 + \frac{1}{2}x + \frac{\frac{1}{2}(\frac{1}{2}-1)}{2!}x^2 + \frac{\frac{1}{2}(\frac{1}{2}-1)(\frac{1}{2}-2)}{3!}x^3 + \frac{\frac{1}{2}(\frac{1}{2}-1)(\frac{1}{2}-2)(\frac{1}{2}-3)}{4!}x^3 $$
+
+$$= 1 + \frac{1}{2}x + \frac{\frac{1}{2}(-\frac{1}{2})}{2}x^2 + \frac{\frac{1}{2}(-\frac{1}{2})(-\frac{3}{2})}{6}x^3 + \frac{\frac{1}{2}(-\frac{1}{2})(-\frac{3}{2})(-\frac{5}{2})}{24}x^3 $$
+
+$$= 1 + \frac{1}{2}x + \frac{-\frac{1}{4}}{2}x^2 + \frac{\frac{3}{8}}{6}x^3 + \frac{-\frac{15}{16}}{24}x^3 $$
+
+$$= 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16}x^3 - \frac{5}{128}x^3 $$
